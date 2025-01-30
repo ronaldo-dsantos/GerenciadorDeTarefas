@@ -2,7 +2,7 @@
 
 namespace GerenciadorDeTarefas.Controllers
 {
-    internal class TarefaController
+    internal class TarefasController
     {
         static List<Tarefa> tarefas = new List<Tarefa>();
         public static void AdicionarTarefa()
@@ -17,15 +17,8 @@ namespace GerenciadorDeTarefas.Controllers
             var descricao = Console.ReadLine();
             Console.Write(Environment.NewLine);
 
-            Console.Write("Prazo de conclusão (dd/mm/aaaa): ");
-            var input = Console.ReadLine();
-            if (string.IsNullOrEmpty(input))
-            {
-                Console.WriteLine("Prazo de conclusão inválido! [Enter]");
-                Console.ReadKey();
-                return;
-            }
-            var prazoConclusao = DateTime.Parse(input);
+            Console.Write("Prazo de conclusão (dd/mm/aaaa): ");            
+            var prazoConclusao = DateTime.Parse(Console.ReadLine());
             Console.Write(Environment.NewLine);
 
             Tarefa tarefa = new Tarefa
@@ -38,10 +31,12 @@ namespace GerenciadorDeTarefas.Controllers
             };
 
             tarefas.Add(tarefa);
+            
             ListarTarefa(tarefa.Id);
 
             Console.WriteLine("Tarefa adicionada com sucesso! [Enter]");
             Console.ReadKey();
+            return;
         }
 
         public static void ListarTarefas()
@@ -65,16 +60,15 @@ namespace GerenciadorDeTarefas.Controllers
                 Console.WriteLine($"Status............: {status}");
                 Console.WriteLine($"Prazo de Conclusão: {tarefa.PrazoConclusao:dd/MM/yyyy}");
                 Console.WriteLine("-------------------------------------");
-
+            }
                 Console.WriteLine("Pressione [Enter] para voltar ao menu principal...");
                 Console.ReadKey();
                 return;
-            }
         }
 
         public static void ListarTarefa(int id)
         {
-            Tarefa? tarefa = tarefas.FirstOrDefault(t => t.Id == id);
+            Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
 
             if (tarefa != null)
             {
@@ -98,19 +92,13 @@ namespace GerenciadorDeTarefas.Controllers
         public static void EditarTarefa()
         {
             Console.Clear();
+
             Console.Write("Digite o ID da tarefa a ser editada: ");
-            var input = Console.ReadLine();
+            var id = int.Parse(Console.ReadLine());
             Console.Write(Environment.NewLine);
 
-            if (string.IsNullOrEmpty(input))
-            {
-                Console.WriteLine("ID inválido! [Enter]");
-                Console.ReadKey();
-                return;
-            }
+            Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
 
-            var id = int.Parse(input);
-            Tarefa? tarefa = tarefas.FirstOrDefault(t => t.Id == id);
             if (tarefa != null)
             {
                 Console.Write("Digite o título da tarefa: ");
@@ -122,51 +110,44 @@ namespace GerenciadorDeTarefas.Controllers
                 Console.Write(Environment.NewLine);
 
                 Console.Write("Data de Vencimento (dd/mm/yyyy): ");
-                var prazoInput = Console.ReadLine();
-                Console.Write(Environment.NewLine);
-
-                if (string.IsNullOrEmpty(prazoInput))
-                {
-                    Console.WriteLine("Data de vencimento inválida! [Enter]");
-                    Console.ReadKey();
-                    return;
-                }
-                tarefa.PrazoConclusao = DateTime.Parse(prazoInput);
+                tarefa.PrazoConclusao = DateTime.Parse(Console.ReadLine());
+                Console.Write(Environment.NewLine);                
 
                 ListarTarefa(tarefa.Id);
 
                 Console.WriteLine("Tarefa editada com sucesso! [Enter]");
                 Console.ReadKey();
+                return;
             }
             else
             {
-                Console.WriteLine("Tarefa não encontrada!");
+                Console.WriteLine("Tarefa não encontrada! [Enter]");
+                Console.ReadKey();
+                return;
             }
         }
 
         public static void ExcluirTarefa()
         {
             Console.Clear();
-            Console.Write("Digite o ID da tarefa a ser excluída: ");
-            var input = Console.ReadLine();
-            if (string.IsNullOrEmpty(input))
-            {
-                Console.WriteLine("ID inválido! [Enter]");
-                Console.ReadKey();
-                return;
-            }
-            var id = int.Parse(input);
 
-            Tarefa? tarefa = tarefas.FirstOrDefault(t => t.Id == id);
+            Console.Write("Digite o ID da tarefa a ser excluída: ");
+            var id = int.Parse(Console.ReadLine());
+            Console.Write(Environment.NewLine);            
+
+            Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
             if (tarefa != null)
             {
                 tarefas.Remove(tarefa);
                 Console.WriteLine("Tarefa excluída com sucesso! [Enter]");
                 Console.ReadKey();
+                return;
             }
             else
             {
-                Console.WriteLine("Tarefa não encontrada!");
+                Console.WriteLine("Tarefa não encontrada! [Enter]");
+                Console.ReadKey();
+                return;
             }
         }
 
@@ -185,19 +166,23 @@ namespace GerenciadorDeTarefas.Controllers
             }
             var id = int.Parse(input);
 
-            Tarefa? tarefa = tarefas.FirstOrDefault(t => t.Id == id);
+            Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
 
             if (tarefa != null)
             {
                 tarefa.Concluida = true;
 
                 ListarTarefa(tarefa.Id);
+
                 Console.WriteLine("Tarefa concluída com sucesso! [Enter]");
                 Console.ReadKey();
+                return;
             }
             else
             {
-                Console.WriteLine("Tarefa não encontrada!");
+                Console.WriteLine("Tarefa não encontrada! [Enter]");
+                Console.ReadKey();
+                return;
             }
         }
     }

@@ -39,23 +39,23 @@ namespace GerenciadorDeTarefas
             switch (opcao)
             {
                 case "1":
-                    TarefaController.AdicionarTarefa();
+                    TarefasController.AdicionarTarefa();
                     Menu();
                     break;
                 case "2":
-                    TarefaController.ListarTarefas();
+                    TarefasController.ListarTarefas();
                     Menu();
                     break;
                 case "3":
-                    TarefaController.EditarTarefa();
+                    TarefasController.EditarTarefa();
                     Menu();
                     break;
                 case "4":
-                    TarefaController.ExcluirTarefa();
+                    TarefasController.ExcluirTarefa();
                     Menu();
                     break;
                 case "5":
-                    TarefaController.ConcluirTarefa();
+                    TarefasController.ConcluirTarefa();
                     Menu();
                     break;
                 case "6":
