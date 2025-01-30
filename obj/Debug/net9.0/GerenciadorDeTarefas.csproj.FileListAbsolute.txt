@@ -12,3 +12,4 @@ C:\Users\ronal\OneDrive\Documentos\desenvolvedor.io\projetos\GerenciadorDeTarefa
 C:\Users\ronal\OneDrive\Documentos\desenvolvedor.io\projetos\GerenciadorDeTarefas\obj\Debug\net9.0\GerenciadorDeTarefas.pdb
 C:\Users\ronal\OneDrive\Documentos\desenvolvedor.io\projetos\GerenciadorDeTarefas\obj\Debug\net9.0\GerenciadorDeTarefas.genruntimeconfig.cache
 C:\Users\ronal\OneDrive\Documentos\desenvolvedor.io\projetos\GerenciadorDeTarefas\obj\Debug\net9.0\ref\GerenciadorDeTarefas.dll
+C:\Users\ronal\OneDrive\Documentos\desenvolvedor.io\projetos\GerenciadorDeTarefas\obj\Debug\net9.0\GerenciadorDeTarefas.sourcelink.json

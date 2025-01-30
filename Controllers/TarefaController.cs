@@ -31,15 +31,49 @@ namespace GerenciadorDeTarefas.Controllers
 
         public static void ListarTarefas()
         {
+            Console.Clear();
             Console.WriteLine("Listando Tarefas");
+
+            foreach (var tarefa in tarefas)
+            {
+                var status = tarefa.Concluida ? "Concluída" : "Pendente";
+                Console.WriteLine($"Id: {tarefa.Id} - Título: {tarefa.Titulo} - Status: {status} - Data de Conclusão: {tarefa.DataConclusao:dd/MM/yyyy}");
+            }
         }
         public static void MarcarComoConcluida()
         {
-            Console.WriteLine("Marcando Tarefa como Concluída");
+            Console.Clear();
+            Console.WriteLine("Digite o ID da tarefa a ser marcada como concluída: ");
+            var id = int.Parse(Console.ReadLine());
+
+            Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
+
+            if (tarefa != null)
+            {
+                tarefa.Concluida = true;
+                Console.WriteLine("Tarefa marcada como concluída com sucesso!");
+            }
+            else
+            {
+                Console.WriteLine("Tarefa não encontrada!");
+            }
         }
         public static void ExcluirTarefa()
         {
-            Console.WriteLine("Excluindo Tarefa");
+            Console.Clear();
+            Console.WriteLine("Digite o ID da tarefa a ser excluída: ");
+            var id = int.Parse(Console.ReadLine());
+
+            Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
+            if (tarefa != null)
+            {
+                tarefas.Remove(tarefa);
+                Console.WriteLine("Tarefa excluída com sucesso!");
+            }
+            else
+            {
+                Console.WriteLine("Tarefa não encontrada!");
+            }
         }
     }
 }
