@@ -8,40 +8,63 @@ namespace GerenciadorDeTarefas
         {
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("Gerenciador de Tarefas");
-                Console.WriteLine("1. Adicionar Tarefa");
-                Console.WriteLine("2. Listar Tarefas");
-                Console.WriteLine("3. Marcar como Concluída");
-                Console.WriteLine("4. Excluir Tarefa");
-                Console.WriteLine("5. Sair");
-                Console.WriteLine("Escolha uma opção: ");
+                Menu();
 
-                var opcao = Console.ReadLine();
-
-                switch (opcao)
-                {
-                    case "1":
-                        TarefaController.AdicionarTarefa();
-                        break;
-                    case "2":
-                        TarefaController.ListarTarefas();
-                        break;
-                    case "3":
-                        TarefaController.MarcarComoConcluida();
-                        break;
-                    case "4":
-                        TarefaController.ExcluirTarefa();
-                        break;
-                    case "5":
-                        return;
-                    default:
-                        Console.WriteLine("Opção inválida");
-                        break;
-                }
-
-                Console.WriteLine("Pressione qualquer tecla para continuar...");
                 Console.ReadKey();
+            }
+        }
+        static void Menu()
+        {
+            Console.Clear();
+
+            Console.WriteLine("Gerenciador de Tarefas");
+            Console.WriteLine("-------------------------");
+            Console.WriteLine("1 - Adicionar Tarefa");
+            Console.WriteLine("2 - Listar Tarefas");
+            Console.WriteLine("3 - Editar Tarefa");
+            Console.WriteLine("4 - Excluir Tarefa");
+            Console.WriteLine("5 - Marcar como Concluída");
+            Console.WriteLine("6 - Sair");
+            Console.WriteLine("-------------------------");
+
+            EscolherOpcao();
+        }
+
+        static void EscolherOpcao()
+        {
+            Console.Write("Escolha uma opção: ");
+
+            var opcao = Console.ReadLine();
+
+            switch (opcao)
+            {
+                case "1":
+                    TarefaController.AdicionarTarefa();
+                    Menu();
+                    break;
+                case "2":
+                    TarefaController.ListarTarefas();
+                    Menu();
+                    break;
+                case "3":
+                    TarefaController.EditarTarefa();
+                    Menu();
+                    break;
+                case "4":
+                    TarefaController.ExcluirTarefa();
+                    Menu();
+                    break;
+                case "5":
+                    TarefaController.MarcarComoConcluida();
+                    Menu();
+                    break;
+                case "6":
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.Clear();
+                    Console.WriteLine("Opção inválida! [Enter]");
+                    break;
             }
         }
     }
