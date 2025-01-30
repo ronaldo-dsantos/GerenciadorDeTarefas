@@ -7,8 +7,8 @@ namespace GerenciadorDeTarefas.Controllers
         static List<Tarefa> tarefas = new List<Tarefa>();
         public static void AdicionarTarefa()
         {
-            Console.Clear();   
-            
+            Console.Clear();
+
             Console.Write("Título da tarefa: ");
             var titulo = Console.ReadLine();
             Console.Write(Environment.NewLine);
@@ -18,7 +18,14 @@ namespace GerenciadorDeTarefas.Controllers
             Console.Write(Environment.NewLine);
 
             Console.Write("Prazo de conclusão (dd/mm/aaaa): ");
-            var prazoConclusao = DateTime.Parse(Console.ReadLine());
+            var input = Console.ReadLine();
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("Prazo de conclusão inválido! [Enter]");
+                Console.ReadKey();
+                return;
+            }
+            var prazoConclusao = DateTime.Parse(input);
             Console.Write(Environment.NewLine);
 
             Tarefa tarefa = new Tarefa
@@ -31,7 +38,7 @@ namespace GerenciadorDeTarefas.Controllers
             };
 
             tarefas.Add(tarefa);
-            VisualizarTarefa(tarefa.Id);
+            ListarTarefa(tarefa.Id);
 
             Console.WriteLine("Tarefa adicionada com sucesso! [Enter]");
             Console.ReadKey();
@@ -65,15 +72,15 @@ namespace GerenciadorDeTarefas.Controllers
             }
         }
 
-        public static void VisualizarTarefa(int id)
+        public static void ListarTarefa(int id)
         {
-            Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
-            
+            Tarefa? tarefa = tarefas.FirstOrDefault(t => t.Id == id);
+
             if (tarefa != null)
             {
                 var status = tarefa.Concluida ? "Concluída" : "Pendente";
-                
-                Console.WriteLine($"ID................: { tarefa.Id}");
+
+                Console.WriteLine($"ID................: {tarefa.Id}");
                 Console.WriteLine($"Título............: {tarefa.Titulo}");
                 Console.WriteLine($"Descrição.........: {tarefa.Descricao}");
                 Console.WriteLine($"Status............: {status}");
@@ -91,18 +98,45 @@ namespace GerenciadorDeTarefas.Controllers
         public static void EditarTarefa()
         {
             Console.Clear();
-            Console.WriteLine("Digite o ID da tarefa a ser editada: ");
-            var id = int.Parse(Console.ReadLine());
-            Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
+            Console.Write("Digite o ID da tarefa a ser editada: ");
+            var input = Console.ReadLine();
+            Console.Write(Environment.NewLine);
+
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("ID inválido! [Enter]");
+                Console.ReadKey();
+                return;
+            }
+
+            var id = int.Parse(input);
+            Tarefa? tarefa = tarefas.FirstOrDefault(t => t.Id == id);
             if (tarefa != null)
             {
-                Console.WriteLine("Digite o título da tarefa: ");
+                Console.Write("Digite o título da tarefa: ");
                 tarefa.Titulo = Console.ReadLine();
-                Console.WriteLine("Digite a descrição da tarefa: ");
+                Console.Write(Environment.NewLine);
+
+                Console.Write("Digite a descrição da tarefa: ");
                 tarefa.Descricao = Console.ReadLine();
-                Console.WriteLine("Data de Vencimento (dd/mm/yyyy): ");
-                tarefa.PrazoConclusao = DateTime.Parse(Console.ReadLine());
-                Console.WriteLine("Tarefa editada com sucesso!");
+                Console.Write(Environment.NewLine);
+
+                Console.Write("Data de Vencimento (dd/mm/yyyy): ");
+                var prazoInput = Console.ReadLine();
+                Console.Write(Environment.NewLine);
+
+                if (string.IsNullOrEmpty(prazoInput))
+                {
+                    Console.WriteLine("Data de vencimento inválida! [Enter]");
+                    Console.ReadKey();
+                    return;
+                }
+                tarefa.PrazoConclusao = DateTime.Parse(prazoInput);
+
+                ListarTarefa(tarefa.Id);
+
+                Console.WriteLine("Tarefa editada com sucesso! [Enter]");
+                Console.ReadKey();
             }
             else
             {
@@ -113,14 +147,22 @@ namespace GerenciadorDeTarefas.Controllers
         public static void ExcluirTarefa()
         {
             Console.Clear();
-            Console.WriteLine("Digite o ID da tarefa a ser excluída: ");
-            var id = int.Parse(Console.ReadLine());
+            Console.Write("Digite o ID da tarefa a ser excluída: ");
+            var input = Console.ReadLine();
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("ID inválido! [Enter]");
+                Console.ReadKey();
+                return;
+            }
+            var id = int.Parse(input);
 
-            Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
+            Tarefa? tarefa = tarefas.FirstOrDefault(t => t.Id == id);
             if (tarefa != null)
             {
                 tarefas.Remove(tarefa);
-                Console.WriteLine("Tarefa excluída com sucesso!");
+                Console.WriteLine("Tarefa excluída com sucesso! [Enter]");
+                Console.ReadKey();
             }
             else
             {
@@ -128,18 +170,30 @@ namespace GerenciadorDeTarefas.Controllers
             }
         }
 
-        public static void MarcarComoConcluida()
+        public static void ConcluirTarefa()
         {
             Console.Clear();
-            Console.WriteLine("Digite o ID da tarefa a ser marcada como concluída: ");
-            var id = int.Parse(Console.ReadLine());
+            Console.Write("Digite o ID da tarefa a ser marcada como concluída: ");
+            var input = Console.ReadLine();
+            Console.Write(Environment.NewLine);
 
-            Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("ID inválido! [Enter]");
+                Console.ReadKey();
+                return;
+            }
+            var id = int.Parse(input);
+
+            Tarefa? tarefa = tarefas.FirstOrDefault(t => t.Id == id);
 
             if (tarefa != null)
             {
                 tarefa.Concluida = true;
-                Console.WriteLine("Tarefa marcada como concluída com sucesso!");
+
+                ListarTarefa(tarefa.Id);
+                Console.WriteLine("Tarefa concluída com sucesso! [Enter]");
+                Console.ReadKey();
             }
             else
             {

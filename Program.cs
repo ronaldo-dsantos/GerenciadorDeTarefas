@@ -55,7 +55,7 @@ namespace GerenciadorDeTarefas
                     Menu();
                     break;
                 case "5":
-                    TarefaController.MarcarComoConcluida();
+                    TarefaController.ConcluirTarefa();
                     Menu();
                     break;
                 case "6":
