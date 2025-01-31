@@ -1,4 +1,4 @@
-﻿using GerenciadorDeTarefas.Controllers;
+using GerenciadorDeTarefas.Controllers;
 
 namespace GerenciadorDeTarefas
 {
