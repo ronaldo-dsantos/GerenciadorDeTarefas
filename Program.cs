@@ -6,12 +6,14 @@ namespace GerenciadorDeTarefas
     {
         static void Main(string[] args)
         {
+            TarefasController.LerTarefas();
+
             while (true)
             {
                 Menu();
 
                 Console.ReadKey();
-            }   
+            }
         }
         static void Menu()
         {
@@ -59,6 +61,7 @@ namespace GerenciadorDeTarefas
                     Menu();
                     break;
                 case "6":
+                    TarefasController.GravarTarefas();
                     Environment.Exit(0);
                     break;
                 default:

@@ -1,10 +1,27 @@
 ﻿using GerenciadorDeTarefas.Models;
+using System.Text.Json;
 
 namespace GerenciadorDeTarefas.Controllers
 {
     internal class TarefasController
     {
         static List<Tarefa> tarefas = new List<Tarefa>();
+
+        public static void GravarTarefas()
+        {
+            var json = JsonSerializer.Serialize(tarefas);
+            File.WriteAllText("tarefas.txt", json);
+        }
+
+        public static void LerTarefas()
+        {
+            if (File.Exists("tarefas.txt"))
+            {
+                var json = File.ReadAllText("tarefas.txt");
+                tarefas = JsonSerializer.Deserialize<List<Tarefa>>(json);
+            }
+        }
+
         public static void AdicionarTarefa()
         {
             Console.Clear();
@@ -23,14 +40,13 @@ namespace GerenciadorDeTarefas.Controllers
             var descricao = Console.ReadLine();
             Console.Write(Environment.NewLine);
 
-            Console.Write("Prazo de conclusão (dd/mm/aaaa): ");            
+            Console.Write("Prazo de conclusão (dd/mm/aaaa): ");
             if (!DateTime.TryParse(Console.ReadLine(), out var prazoConclusao))
             {
                 Console.WriteLine("Data de conclusão inválida! [Enter]");
                 Console.ReadKey();
                 return;
             }
-
             Console.Write(Environment.NewLine);
 
             Tarefa tarefa = new Tarefa
@@ -43,12 +59,11 @@ namespace GerenciadorDeTarefas.Controllers
             };
 
             tarefas.Add(tarefa);
-            
+
             ListarTarefa(tarefa.Id);
 
             Console.WriteLine("Tarefa adicionada com sucesso! [Enter]");
             Console.ReadKey();
-            return;
         }
 
         public static void ListarTarefas()
@@ -73,9 +88,8 @@ namespace GerenciadorDeTarefas.Controllers
                 Console.WriteLine($"Prazo de Conclusão: {tarefa.PrazoConclusao:dd/MM/yyyy}");
                 Console.WriteLine("-------------------------------------");
             }
-                Console.WriteLine("Pressione [Enter] para voltar ao menu principal...");
-                Console.ReadKey();
-                return;
+            Console.WriteLine("Pressione [Enter] para voltar ao menu principal...");
+            Console.ReadKey();
         }
 
         public static void ListarTarefa(int id)
@@ -97,7 +111,6 @@ namespace GerenciadorDeTarefas.Controllers
             {
                 Console.WriteLine("Tarefa não encontrada! [Enter]");
                 Console.ReadKey();
-                return;
             }
         }
 
