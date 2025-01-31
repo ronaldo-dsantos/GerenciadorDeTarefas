@@ -5,10 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{3E648163-7161-4982-8B8C-261A572D939B}|GerenciadorDeTarefas.csproj|c:\\users\\ronal\\onedrive\\documentos\\desenvolvedor.io\\projetos\\gerenciadordetarefas\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E648163-7161-4982-8B8C-261A572D939B}|GerenciadorDeTarefas.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3E648163-7161-4982-8B8C-261A572D939B}|GerenciadorDeTarefas.csproj|c:\\users\\ronal\\onedrive\\documentos\\desenvolvedor.io\\projetos\\gerenciadordetarefas\\controllers\\tarefacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E648163-7161-4982-8B8C-261A572D939B}|GerenciadorDeTarefas.csproj|solutionrelative:controllers\\tarefacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,24 +22,12 @@
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\projetos\\GerenciadorDeTarefas\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\projetos\\GerenciadorDeTarefas\\Program.cs*",
-              "RelativeToolTip": "Program.cs*",
-              "ViewState": "AgIAACMAAAAAAAAAAAAgwD4AAAAaAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\projetos\\GerenciadorDeTarefas\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-30T01:47:21.285Z",
+              "WhenOpened": "2025-01-31T01:54:35.798Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TarefaController.cs",
-              "DocumentMoniker": "C:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\projetos\\GerenciadorDeTarefas\\Controllers\\TarefaController.cs",
-              "RelativeDocumentMoniker": "Controllers\\TarefaController.cs",
-              "ToolTip": "C:\\Users\\ronal\\OneDrive\\Documentos\\desenvolvedor.io\\projetos\\GerenciadorDeTarefas\\Controllers\\TarefaController.cs",
-              "RelativeToolTip": "Controllers\\TarefaController.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAQwD8AAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-30T00:37:15.397Z"
             }
           ]
         }

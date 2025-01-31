@@ -11,6 +11,12 @@ namespace GerenciadorDeTarefas.Controllers
 
             Console.Write("Título da tarefa: ");
             var titulo = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(titulo))
+            {
+                Console.WriteLine("Título inválido! [Enter]");
+                Console.ReadKey();
+                return;
+            }
             Console.Write(Environment.NewLine);
 
             Console.Write("Descrição da tarefa: ");
@@ -18,7 +24,13 @@ namespace GerenciadorDeTarefas.Controllers
             Console.Write(Environment.NewLine);
 
             Console.Write("Prazo de conclusão (dd/mm/aaaa): ");            
-            var prazoConclusao = DateTime.Parse(Console.ReadLine());
+            if (!DateTime.TryParse(Console.ReadLine(), out var prazoConclusao))
+            {
+                Console.WriteLine("Data de conclusão inválida! [Enter]");
+                Console.ReadKey();
+                return;
+            }
+
             Console.Write(Environment.NewLine);
 
             Tarefa tarefa = new Tarefa
@@ -94,15 +106,26 @@ namespace GerenciadorDeTarefas.Controllers
             Console.Clear();
 
             Console.Write("Digite o ID da tarefa a ser editada: ");
-            var id = int.Parse(Console.ReadLine());
+            if (!int.TryParse(Console.ReadLine(), out var id))
+            {
+                Console.WriteLine("ID inválido! [Enter]");
+                Console.ReadKey();
+                return;
+            }
             Console.Write(Environment.NewLine);
 
             Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
 
             if (tarefa != null)
             {
-                Console.Write("Digite o título da tarefa: ");
-                tarefa.Titulo = Console.ReadLine();
+                Console.Write("Título da tarefa: ");
+                var titulo = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(titulo))
+                {
+                    Console.WriteLine("Título inválido! [Enter]");
+                    Console.ReadKey();
+                    return;
+                }
                 Console.Write(Environment.NewLine);
 
                 Console.Write("Digite a descrição da tarefa: ");
@@ -110,21 +133,24 @@ namespace GerenciadorDeTarefas.Controllers
                 Console.Write(Environment.NewLine);
 
                 Console.Write("Data de Vencimento (dd/mm/yyyy): ");
-                tarefa.PrazoConclusao = DateTime.Parse(Console.ReadLine());
-                Console.Write(Environment.NewLine);                
+                if (!DateTime.TryParse(Console.ReadLine(), out var prazoConclusao))
+                {
+                    Console.WriteLine("Data de conclusão inválida! [Enter]");
+                    Console.ReadKey();
+                    return;
+                }
+                tarefa.PrazoConclusao = prazoConclusao;
+                Console.Write(Environment.NewLine);
 
                 ListarTarefa(tarefa.Id);
 
                 Console.WriteLine("Tarefa editada com sucesso! [Enter]");
-                Console.ReadKey();
-                return;
             }
             else
             {
                 Console.WriteLine("Tarefa não encontrada! [Enter]");
-                Console.ReadKey();
-                return;
             }
+            Console.ReadKey();
         }
 
         public static void ExcluirTarefa()
@@ -132,23 +158,26 @@ namespace GerenciadorDeTarefas.Controllers
             Console.Clear();
 
             Console.Write("Digite o ID da tarefa a ser excluída: ");
-            var id = int.Parse(Console.ReadLine());
-            Console.Write(Environment.NewLine);            
-
-            Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
-            if (tarefa != null)
+            if (int.TryParse(Console.ReadLine(), out var id))
             {
-                tarefas.Remove(tarefa);
-                Console.WriteLine("Tarefa excluída com sucesso! [Enter]");
-                Console.ReadKey();
-                return;
+                Console.Write(Environment.NewLine);
+
+                Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
+                if (tarefa != null)
+                {
+                    tarefas.Remove(tarefa);
+                    Console.WriteLine("Tarefa excluída com sucesso! [Enter]");
+                }
+                else
+                {
+                    Console.WriteLine("Tarefa não encontrada! [Enter]");
+                }
             }
             else
             {
-                Console.WriteLine("Tarefa não encontrada! [Enter]");
-                Console.ReadKey();
-                return;
+                Console.WriteLine("ID inválido! [Enter]");
             }
+            Console.ReadKey();
         }
 
         public static void ConcluirTarefa()
@@ -158,13 +187,12 @@ namespace GerenciadorDeTarefas.Controllers
             var input = Console.ReadLine();
             Console.Write(Environment.NewLine);
 
-            if (string.IsNullOrEmpty(input))
+            if (string.IsNullOrEmpty(input) || !int.TryParse(input, out var id))
             {
                 Console.WriteLine("ID inválido! [Enter]");
                 Console.ReadKey();
                 return;
             }
-            var id = int.Parse(input);
 
             Tarefa tarefa = tarefas.FirstOrDefault(t => t.Id == id);
 
@@ -176,13 +204,11 @@ namespace GerenciadorDeTarefas.Controllers
 
                 Console.WriteLine("Tarefa concluída com sucesso! [Enter]");
                 Console.ReadKey();
-                return;
             }
             else
             {
                 Console.WriteLine("Tarefa não encontrada! [Enter]");
                 Console.ReadKey();
-                return;
             }
         }
     }
