@@ -7,13 +7,15 @@ namespace GerenciadorDeTarefas.Controllers
     {
         static List<Tarefa> tarefas = new List<Tarefa>();
 
-        public static void GravarTarefas()
+        // Método para gravar as tarefas em um arquivo txt
+        public static void GravarDados()
         {
             var json = JsonSerializer.Serialize(tarefas);
             File.WriteAllText("tarefas.txt", json);
         }
 
-        public static void LerTarefas()
+        // Método para ler as tarefas de um arquivo txt
+        public static void LerDados()
         {
             if (File.Exists("tarefas.txt"))
             {
