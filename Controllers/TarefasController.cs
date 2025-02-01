@@ -134,13 +134,13 @@ namespace GerenciadorDeTarefas.Controllers
             if (tarefa != null)
             {
                 Console.Write("Título da tarefa: ");
-                var titulo = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(titulo))
+                if (string.IsNullOrWhiteSpace(tarefa.Titulo))
                 {
                     Console.WriteLine("Título inválido! [Enter]");
                     Console.ReadKey();
                     return;
                 }
+                tarefa.Titulo = Console.ReadLine();
                 Console.Write(Environment.NewLine);
 
                 Console.Write("Digite a descrição da tarefa: ");
